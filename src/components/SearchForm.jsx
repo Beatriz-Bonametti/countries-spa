@@ -34,6 +34,7 @@ export default function SearchForm() {
         <TextField
           label="Nome do país"
           fullWidth
+          placeholder="Ex: brazil"
           {...register("name")}
           error={!!errors.name}
           helperText={errors.name?.message}
