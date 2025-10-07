@@ -8,7 +8,7 @@ export default function App() {
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
       <Typography variant="h2" fontWeight={800} gutterBottom>
-        Countries Explorer
+        Explore Países
       </Typography>
 
       <Box sx={{ mb: 2 }}>
