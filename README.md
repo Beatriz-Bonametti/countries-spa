@@ -1,16 +1,46 @@
-# React + Vite
+# Countries Explorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação web desenvolvida em *React.js* com *Vite* para explorar informações de países utilizando a *REST Countries API*.  
+Permite buscar países por *nome, **código (alpha-2/3)* ou *região*, com ordenação e filtros dinâmicos.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Deploy
+O projeto está hospedado na *Vercel*:  
+🔗 [Acessar aplicação online](https://countries-spa.vercel.app)
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Funcionalidades
+- Buscar países pelo nome, código ou região  
+- Exibir bandeira, capital, população e códigos ISO  
+- Ordenar resultados por nome ou população  
+- Filtrar por população mínima  
+- Feedback visual de carregamento e erros  
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Hooks e Gerenciamento de Estado
+- *useReducer* → gerencia o estado global da aplicação (buscas, erros, status, resultados)  
+- *useMemo* → otimiza filtros e ordenações da lista de países  
+- *useForm (react-hook-form)* → controla e valida o formulário de busca  
+
+---
+
+## Principais Bibliotecas
+| Biblioteca | Função |
+|-------------|--------|
+| *React.js* | Biblioteca principal para criação da interface |
+| *Vite* | Ferramenta de build e ambiente de desenvolvimento |
+| *Material UI (MUI)* | Componentes visuais modernos e responsivos |
+| *React Hook Form* | Manipulação e controle do formulário |
+| *Yup* | Validação dos campos do formulário |
+| *REST Countries API* | Fonte de dados (https://restcountries.com) |
+
+---
+
+## Instalação local
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/Beatriz-Bonametti/countries-spa.git
