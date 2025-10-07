@@ -23,10 +23,10 @@ export default function CountryCard({ country }) {
             <strong>Capital:</strong> {country.capital?.[0] ?? "—"}
           </Typography>
           <Typography variant="body2">
-            <strong>População:</strong> {country.population?.toLocaleString() ?? "—"}
+            <strong>População local:</strong> {country.population?.toLocaleString() ?? "—"}
           </Typography>
           <Typography variant="body2">
-            <strong>Códigos:</strong> {country.cca2}/{country.cca3}
+            <strong>Código País:</strong> {country.cca2}/{country.cca3}
           </Typography>
         </Stack>
       </CardContent>
