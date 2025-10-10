@@ -7,7 +7,7 @@ Permite buscar países por *nome, **código (alpha-2/3)* ou *região*, com orden
 
 ## Deploy
 O projeto está hospedado na *Vercel*:  
-🔗 [Acessar aplicação online](https://countries-spa.vercel.app)
+🔗 [Acessar aplicação online](https://countries-spa-zeta.vercel.app/)
 
 ---
 
