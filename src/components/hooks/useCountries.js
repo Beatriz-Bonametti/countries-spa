@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useApp } from "../contexts/AppContext";
+import { useApp } from "../../contexts/AppContext";
 import { fetchByName, fetchByRegion, fetchByCode } from "../services/restcountries";
 
 export function useCountries() {

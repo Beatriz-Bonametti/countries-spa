@@ -39,6 +39,12 @@ O projeto está hospedado na *Vercel*:
 
 ---
 
+### Estrutura do projeto 
+- src/components → contém todos os componentes, hooks, validações e serviços.
+- src/contexts → contém a Context API (AppContext, useReducer, etc).
+- Biblioteca de UI: Material UI (MUI).
+- Formulário com validação via Yup + React Hook Form (antes da chamada à API).
+
 ## Instalação local
 
 1. Clone o repositório:

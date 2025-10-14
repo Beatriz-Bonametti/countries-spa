@@ -1,25 +1,60 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useCountries } from "../hooks/useCountries";
+import { useCountries } from "./hooks/useCountries";
 import { Stack, TextField, MenuItem, Button, Alert } from "@mui/material";
 
-const schema = yup.object({
-  name: yup.string().trim(),
-  region: yup.string().oneOf(["Africa","Americas","Asia","Europe","Oceania","Antarctic",""]).optional(),
-  code: yup.string().trim().max(3),
-}).test("one-required", "Informe nome, região ou código (alpha-2/alpha-3).", (v) =>
-  Boolean(v?.name) || Boolean(v?.region) || Boolean(v?.code)
-);
+const schema = yup
+  .object({
+    name: yup
+      .string()
+      .trim()
+      .transform((v) => (v === "" ? undefined : v))
+      .min(1, "Digite um nome")
+      .optional(),
+
+    region: yup
+      .string()
+      .oneOf(
+        ["Africa", "Americas", "Asia", "Europe", "Oceania", "Antarctic", ""],
+        "Região inválida"
+      )
+      .transform((v) => (v === "" ? undefined : v))
+      .optional(),
+
+    code: yup
+      .string()
+      .trim()
+      .transform((v) => (v === "" ? undefined : v))
+      .min(2, "Código com pelo menos 2 letras")
+      .max(3, "Código no máximo com 3 letras")
+      .matches(/^[A-Za-z]{2,3}$/, "Use apenas letras (alpha-2/alpha-3)")
+      .optional(),
+  })
+  .test(
+    "one-required",
+    "Informe nome, região ou código (alpha-2/alpha-3).",
+    (v) => Boolean(v?.name) || Boolean(v?.region) || Boolean(v?.code)
+  );
 
 export default function SearchForm() {
   const { status, error, search } = useCountries();
-  const { register, handleSubmit, formState:{ errors } } = useForm({
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: { name:"", region:"", code:"" }
+    defaultValues: { name: "", region: "", code: "" },
+    mode: "onChange",      
+    reValidateMode: "onChange",
   });
 
-  const onSubmit = (data) => search(data);
+  const onSubmit = (data) => {
+    search(data);
+  };
+
   const isLoading = status === "loading";
 
   return (
@@ -30,6 +65,7 @@ export default function SearchForm() {
         direction={{ xs: "column", sm: "row" }}
         spacing={2}
         alignItems="flex-start"
+        noValidate
       >
         <TextField
           label="Nome do país"
@@ -39,31 +75,39 @@ export default function SearchForm() {
           error={!!errors.name}
           helperText={errors.name?.message}
         />
+
         <TextField
           label="Código"
+          placeholder="Ex: BR ou BRA"
           {...register("code")}
           error={!!errors.code}
           helperText={errors.code?.message}
           sx={{ width: { xs: "100%", sm: 220 } }}
+          inputProps={{ maxLength: 3 }}
         />
+
         <TextField
           label="Região"
           select
           defaultValue=""
           {...register("region")}
           error={!!errors.region}
+          helperText={errors.region?.message}
           sx={{ width: { xs: "100%", sm: 220 } }}
         >
           <MenuItem value="">—</MenuItem>
-          {["Africa","Americas","Asia","Europe","Oceania","Antarctic"].map(r => (
-            <MenuItem key={r} value={r}>{r}</MenuItem>
+          {["Africa", "Americas", "Asia", "Europe", "Oceania", "Antarctic"].map((r) => (
+            <MenuItem key={r} value={r}>
+              {r}
+            </MenuItem>
           ))}
         </TextField>
+
         <Button
           type="submit"
           variant="contained"
           size="large"
-          disabled={isLoading}
+          disabled={!isValid || isLoading} 
         >
           {isLoading ? "Buscando..." : "Buscar"}
         </Button>
