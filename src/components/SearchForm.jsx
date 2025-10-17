@@ -10,7 +10,8 @@ const schema = yup
       .string()
       .trim()
       .transform((v) => (v === "" ? undefined : v))
-      .min(1, "Digite um nome")
+      .min(3, "Digite um nome")
+      .matches(/^[A-Za-z\s]+$/, "Nome do país deve conter apenas letras e espaços")
       .optional(),
 
     region: yup
